@@ -5,11 +5,11 @@ from pymongo import MongoClient
 
 load_dotenv()
 
-host = os.getenv("DB_HOST")
-port = os.getenv("DB_PORT")
-user = os.getenv("DB_USER")
-password = os.getenv("DB_PASSWORD")
-db_name = os.getenv("DB_NAME")
+host = os.getenv("MONGODB_HOST")
+port = os.getenv("MONGODB_PORT")
+user = os.getenv("MONGODB_USER")
+password = os.getenv("MONGODB_PASS")
+db_name = os.getenv("MONGODB_NAME")
 
 mongodb_connection = f"mongodb://{user}:{password}@{host}:{port}/{db_name}"
 client = MongoClient(host=mongodb_connection)
