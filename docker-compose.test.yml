@@ -12,6 +12,7 @@ services:
       - MONGODB_PORT=27017
       - MONGODB_USER=root
       - MONGODB_PASS=pass
+      - MONGODB_NAME=RnDAO
       - REDIS_HOST=redis
       - REDIS_PORT=6379
       - REDIS_PASSWORD=password
@@ -31,6 +32,7 @@ services:
       - SENTRY_ENV=local
     volumes:
       - ./coverage:/project/coverage
+      - ./:/project
     networks:
       - python_service_network
     depends_on:
