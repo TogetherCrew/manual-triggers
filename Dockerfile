@@ -9,4 +9,4 @@ RUN python3 -m coverage run -m pytest tests
 CMD ["python3", "-m", "coverage", "lcov" ,"-o", "coverage/lcov.info"]
 
 FROM base AS prod
-CMD ["python3", "server.py"]
+CMD ["python3", "main.py"]
