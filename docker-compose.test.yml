@@ -1,0 +1,70 @@
+version: "3.9"
+
+services:
+  app:
+    build:
+      context: .
+      target: test
+      dockerfile: Dockerfile
+    environment:
+      - PORT=3000
+      - MONGODB_HOST=mongo
+      - MONGODB_PORT=27017
+      - MONGODB_USER=root
+      - MONGODB_PASS=pass
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - REDIS_PASSWORD=password
+      - RABBIT_HOST=rabbitmq
+      - RABBIT_PORT=5672
+      - RABBIT_USER=root
+      - RABBIT_PASSWORD=pass
+      - NEO4J_PROTOCOL=bolt
+      - NEO4J_HOST=neo4j
+      - NEO4J_PORT=7687
+      - NEO4J_USER=neo4j
+      - NEO4J_PASSWORD=password
+      - NEO4J_DB=neo4j
+      - SAGA_DB_NAME=Saga
+      - SAGA_DB_COLLECTION=saga
+      - SENTRY_DSN=sample_dsn
+      - SENTRY_ENV=local
+    volumes:
+      - ./coverage:/project/coverage
+    networks:
+      - python_service_network
+    depends_on:
+      - redis
+      - mongo
+      - neo4j
+      - rabbitmq
+  redis:
+    image: "redis:7.0.12-alpine"
+    networks:
+      - python_service_network
+  mongo:
+    image: "mongo:6.0.8"
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=pass
+    networks:
+      - python_service_network
+  rabbitmq:
+    image: "rabbitmq:3-management-alpine"
+    environment:
+      - RABBITMQ_DEFAULT_USER=root
+      - RABBITMQ_DEFAULT_PASS=pass
+    networks:
+      - python_service_network
+  neo4j:
+    image: "neo4j:5.9.0"
+    environment:
+      - NEO4J_AUTH=neo4j/password
+      - NEO4J_PLUGINS=["apoc", "graph-data-science"]
+      - NEO4J_dbms_security_procedures_unrestricted=apoc.*,gds.*
+    networks:
+      - python_service_network
+
+networks:
+  python_service_network:
+    driver: bridge
