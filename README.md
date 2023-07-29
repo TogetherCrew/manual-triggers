@@ -1,1 +1,3 @@
-# python-service
+# manual-triggers
+
+Manually launch choreographies.
