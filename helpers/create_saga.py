@@ -1,10 +1,11 @@
 from uuid import uuid4
 from mongodb_connection import client
 from bson.binary import UuidRepresentation
+from datetime import datetime
 
 def create_saga(guild_id):
     sagaId = uuid4()
-    ts = datetime.datetime.now().strftime('%Y-%m-%dT%H:%M:%S.%f+00:00')
+    ts = datetime.now().strftime('%Y-%m-%dT%H:%M:%S.%f+00:00')
     saga = {
         "choreography": {
             "name": "MANUAL_ANALYZER",
