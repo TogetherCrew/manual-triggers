@@ -4,7 +4,7 @@ from bson.binary import UuidRepresentation
 from datetime import datetime
 
 def create_saga(guild_id):
-    sagaId = uuid4()
+    sagaId = str(uuid4())
     ts = datetime.now().strftime('%Y-%m-%dT%H:%M:%S.%f+00:00')
     saga = {
         "choreography": {
