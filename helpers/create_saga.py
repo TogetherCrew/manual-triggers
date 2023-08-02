@@ -1,8 +1,8 @@
 import uuid
 from mongodb_connection import client
+from bson.objectid import ObjectId
 
 def create_saga(guild_id):
-    saga_id = uuid.uuid1()
     saga = {
         "choreography": {
             "name": "MANUAL_ANALYZER",
@@ -30,7 +30,7 @@ def create_saga(guild_id):
     db = client.get_database("Saga")
     collection = db.get_collection("sagas")
     result = collection.insert_one(saga)
-    _id = result.inserted_id
-    x = collection.find_one({ _id: _id })
-    print(x)
-    return x.sagaId
+    object_id = ObjectId(result.inserted_id)
+    document = collection.find_one({ "_id": object_id })
+    print(document)
+    return document.sagaId
