@@ -4,8 +4,8 @@ from bson.binary import UuidRepresentation
 
 def create_saga(guild_id):
     sagaId = uuid4()
+    ts = datetime.datetime.now().strftime('%Y-%m-%dT%H:%M:%S.%f+00:00')
     saga = {
-        "sagaId": sagaId,
         "choreography": {
             "name": "MANUAL_ANALYZER",
             "transactions": [
@@ -27,7 +27,10 @@ def create_saga(guild_id):
         "status": "NOT_STARTED",
         "data": {
             "guildId": guild_id
-        }
+        },
+        "sagaId": sagaId,
+        "createdAt": ts,
+        "updatedAt": ts
     }
     db = client.get_database("Saga")
     collection = db.get_collection("sagas")
