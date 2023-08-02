@@ -26,7 +26,7 @@ def main():
 
     print("Welcome to Manual Triggers!")
 
-    db = client.get_default_database()
+    db = client.RnDAO
     guilds = get_guilds(db=db)
 
     print_guilds(guilds)
