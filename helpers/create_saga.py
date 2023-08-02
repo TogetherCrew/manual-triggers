@@ -2,7 +2,7 @@ import uuid
 from mongodb_connection import client
 
 def create_saga(guild_id):
-    saga_id = uuid.uuid4()
+    saga_id = uuid.uuid1()
     saga = {
         "choreography": {
             "name": "MANUAL_ANALYZER",
