@@ -25,10 +25,10 @@ def create_saga(guild_id):
         "status": "NOT_STARTED",
         "data": {
             "guildId": guild_id
-        },
-        "sagaId": saga_id
+        }
     }
     db = client.get_database("Saga")
     collection = db.get_collection("sagas")
-    collection.insert_one(saga)
-    return saga_id
+    x = collection.insert_one(saga)
+    print(x)
+    return x.sagaId
