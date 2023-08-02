@@ -12,7 +12,7 @@ def workflow(guild_ids):
         rabbit_mq.connect(queue)
         content = { "uuid": saga_id, "data": { "guildId": guild_id }}
         rabbit_mq.publish(
-            queue=queue,
+            queue,
             event=event,
             content=content
         )
