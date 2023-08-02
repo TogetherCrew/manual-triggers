@@ -29,6 +29,8 @@ def create_saga(guild_id):
     }
     db = client.get_database("Saga")
     collection = db.get_collection("sagas")
-    x = collection.insert_one(saga)
+    result = collection.insert_one(saga)
+    _id = result.inserted_id
+    x = collection.find_one({ _id: _id })
     print(x)
     return x.sagaId
