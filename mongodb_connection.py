@@ -12,4 +12,4 @@ password = os.getenv("MONGODB_PASS")
 db_name = os.getenv("MONGODB_NAME")
 
 mongodb_connection = f"mongodb://{user}:{password}@{host}:{port}"
-client = MongoClient(host=mongodb_connection)
+client = MongoClient(host=mongodb_connection, uuidRepresentation='standard')
